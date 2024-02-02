@@ -1,0 +1,82 @@
+// Variables
+$heart-color: #e74c3c; // Red color for the heart shape
+
+// Mixin for heart shape
+@mixin heart($size: 50px) {
+  width: $size;
+  height: $size;
+  background-color: $heart-color;
+  position: absolute;
+  transform: rotate(-45deg);
+  margin-top: ($size / -2);
+  margin-left: ($size / -2);
+
+  &:before,
+  &:after {
+    content: '';
+    width: $size;
+    height: $size;
+    background-color: $heart-color;
+    border-radius: 50%;
+    position: absolute;
+  }
+
+  &:before {
+    top: ($size / -2);
+    left: 0;
+  }
+
+  &:after {
+    top: 0;
+    left: ($size / -2);
+  }
+}
+
+// Heart shapes
+.heart {
+  @include heart(50px);
+  top: 50%;
+  left: 50%;
+}
+
+.heart-large {
+  @include heart(100px);
+  top: 40%;
+  left: 60%;
+}
+
+.heart-small {
+  @include heart(30px);
+  top: 70%;
+  left: 30%;
+}
+
+// Background styles
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f8f9fa; // Light background color
+  overflow: hidden;
+
+  .heart {
+    animation: heartbeat 1.5s infinite alternate;
+  }
+
+  .heart-large {
+    animation: heartbeat 2s infinite alternate-reverse;
+  }
+
+  .heart-small {
+    animation: heartbeat 1s infinite alternate-reverse;
+  }
+}
+
+// Heartbeat animation
+@keyframes heartbeat {
+  to {
+    transform: scale(1.1);
+  }
+}
